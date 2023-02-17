@@ -1,11 +1,17 @@
 import  { configureStore } from '@reduxjs/toolkit';
 import { LOCAL_STORAGE_KEY } from '../js/consts';
-import favoritesSlice from './favoritesSlice.js/favoritesSlice';
-import temperatureUnitSlice from './temperatureUnitSlice/temperatureUnitSlice';
+import currentLocationSlice from './currentLocationSlice/currentLocationSlice';
+import favoritesSlice from './favoritesSlice/favoritesSlice';
+import langSlice from './langSlice/langSlice';
+import unitsSlice from './unitsSlice/unitsSlice';
 
-const store = configureStore({
-    favorites: favoritesSlice, 
-    temperatureUnit: temperatureUnitSlice, 
+export const store = configureStore({
+    reducer: {
+        favorites: favoritesSlice, 
+        currentLocation: currentLocationSlice, 
+        lang: langSlice, 
+        units: unitsSlice, 
+    }
 });
 
 store.subscribe(() => {
