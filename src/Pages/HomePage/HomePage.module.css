@@ -1,0 +1,10 @@
+.name {
+    composes: title from '../../Styles/Types.module.css';
+}
+
+.day, 
+.hours {
+    composes: common from '../../Styles/Types.module.css';
+    composes: capitalize from '../../Styles/Types.module.css';
+    composes: semistrong from '../../Styles/Types.module.css';
+}

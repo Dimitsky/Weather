@@ -1,0 +1,42 @@
+.title, 
+.subtitle, 
+.paragraph {
+    margin-top: 0;
+    margin-bottom: 0;
+    line-height: 1.5;
+}
+
+.title, 
+.subtitle {
+    margin-bottom: 0.1em;
+    color: var(--grey-8);
+}
+
+.title {
+    font-size: 1.5em;
+    font-weight: 600;
+}
+
+.subtitle {
+    font-size: 1.2em;
+}
+
+.strong {
+    font-weight: 600;
+}
+
+.semistrong {
+    font-weight: 500;
+}
+
+.common {
+    color: var(--grey-6);
+}
+
+.uppercase {
+    text-transform: uppercase;
+}
+
+.capitalize {
+    text-transform: capitalize;
+}

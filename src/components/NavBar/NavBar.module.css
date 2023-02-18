@@ -1,0 +1,35 @@
+.menu {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.burger {
+    composes: reset from '../../Styles/Button.module.css';
+    /* border: 1px solid red; */
+    position: relative;
+    --size: 44px;
+    width: var(--size);
+    height: var(--size);
+}
+
+.first, 
+.last {
+    position: absolute;
+    right: 8px;
+    border-radius: 2px;
+    display: block;
+    height: 2px;
+    background: var(--grey-4);
+    transition: transform 500ms ease;
+}
+
+.first {
+    top: 16px;
+    width: 14px;
+}
+
+.last {
+    top: 24px;
+    width: 26px;
+}

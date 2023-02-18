@@ -1,0 +1,23 @@
+.container {
+    composes: container from '../../Styles/Container.module.css';
+}
+
+.burger {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+}
+
+@media screen and (min-width: 768px) {
+    .burger {
+        top: 1rem;
+        right: 1rem;
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .burger {
+        top: 1.5rem;
+        right: 1.5rem;
+    }
+}

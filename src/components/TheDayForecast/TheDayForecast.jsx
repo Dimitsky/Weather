@@ -8,17 +8,17 @@ export default function TheDayForecast({ className, data, title, ...restProps })
 
     return (
         <div
-            className={className ? [styles.daily, className].join(' ') : styles.daily}
+            className={className ? [styles.wrap, className].join(' ') : styles.wrap}
             {...restProps}
         >
             {
                 title && (
-                    <h2>
+                    <h2 className={styles.title}>
                         {title}
                     </h2>
                 )
             }
-            <div>
+            <div className={}>
                 <span>
                     pressure
                 </span>

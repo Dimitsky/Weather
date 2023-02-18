@@ -1,14 +1,12 @@
 import { Outlet } from "react-router-dom";
 import NavBar from "../../components/NavBar/NavBar";
 
-import styles from '../../Styles/Container.module.css';
+import styles from './Root.module.css';
 
 export default function Root() {
     return (
         <div className={styles.container}>
-            <header>
-                <NavBar />
-            </header>
+            <NavBar className={styles.burger} />
             <Outlet />
         </div>
     )

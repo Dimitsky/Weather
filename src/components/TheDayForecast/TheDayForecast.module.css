@@ -1,0 +1,11 @@
+.wrap {
+    composes: container from '../../Styles/Container.module.css';
+    border-radius: 0.75rem;
+    background: var(--grey-1);
+}
+
+.title {
+    composes: subtitle from '../../Styles/Types.module.css';
+    composes: strong from '../../Styles/Types.module.css';
+    margin-bottom: 1em;
+}

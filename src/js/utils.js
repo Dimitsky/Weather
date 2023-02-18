@@ -135,7 +135,7 @@ const utils = {
         switch (lang) {
             case LANG.RU:
             case LANG.EN:
-                return prefix ? temp.toFixed(0) + '°' : temp.toFixed(0);
+                return prefix ? temp.toFixed(0) + '°' : temp.toFixed(0) + '°';
         }
     }, 
 

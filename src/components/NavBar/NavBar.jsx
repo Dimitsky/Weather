@@ -40,32 +40,36 @@ export default function NavBar({ className, ...restProps}) {
                 aria-controls='menu'
                 onClick={handleToggleMenu}
             >
-                <span className="first"></span>
-                <span className="last"></span>
+                <span className={styles.first}></span>
+                <span className={styles.last}></span>
             </button>
-            <ul
-                className={styles.menu}
-                id="menu"
-            >
-                <li className={styles.item}>
-                    <a 
-                        className={styles.link}
-                        href="#"
-                        onClick={handleCelsius}
+            {
+                isOpen && (
+                    <ul
+                        className={styles.menu}
+                        id="menu"
                     >
-                        Градусы Цельсия
-                    </a>
-                </li>
-                <li className={styles.item}>
-                    <a 
-                        className={styles.link}
-                        href="#"
-                        onClick={handleFahrenheit}
-                    >
-                        Градусы Фаренгейта
-                    </a>
-                </li>
-            </ul>
+                        <li className={styles.item}>
+                            <a 
+                                className={styles.link}
+                                href="#"
+                                onClick={handleCelsius}
+                            >
+                                Градусы Цельсия
+                            </a>
+                        </li>
+                        <li className={styles.item}>
+                            <a 
+                                className={styles.link}
+                                href="#"
+                                onClick={handleFahrenheit}
+                            >
+                                Градусы Фаренгейта
+                            </a>
+                        </li>
+                    </ul>
+                )
+            }
         </div>
     )
 }

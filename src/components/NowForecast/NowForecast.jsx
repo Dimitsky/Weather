@@ -8,19 +8,20 @@ export default function NowForecast({ className, data, ...restProps }) {
     
     return (
         <div
-            className={className ? [styles.now, className].join(' ') : styles.now}
+            className={className ? [styles.wrap, className].join(' ') : styles.wrap}
             {...restProps}
         >
             <img 
+                className={styles.img}
                 src={utils.getWeatherIconSrc(data.weather[0].icon)} 
                 alt="" 
             />
-            <p>
+            <span className={styles.temp}>
                 {utils.getTemp(data.main.temp, lang)}
-            </p>
-            <p>
+            </span>
+            <span className={styles.description}>
                 {data.weather[0].description}
-            </p>
+            </span>
         </div>
     )
 }
