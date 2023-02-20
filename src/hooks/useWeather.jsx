@@ -17,14 +17,14 @@ export default function useWeather({ lat, lon, weatherType = 'weather'}) {
             lang: lang, 
             units: units, 
         }
-        console.log(units)
+
         const api = new ApiOpenWeather(options);
 
         return api.getData(lat, lon);
     }
 
     return useQuery({
-        queryKey: [weatherType, {lat, lon}], 
+        queryKey: [weatherType, {lat, lon, lang, units}], 
         queryFn: handler, 
         refetchOnWindowFocus: false, 
     })

@@ -5,6 +5,7 @@ import styles from './TheDayForecast.module.css';
 
 export default function TheDayForecast({ className, data, title, ...restProps }) {
     const lang = useSelector((state) => state.lang);
+    const units = useSelector((state) => state.units);
 
     return (
         <div
@@ -18,51 +19,55 @@ export default function TheDayForecast({ className, data, title, ...restProps })
                     </h2>
                 )
             }
-            <div className={}>
-                <span>
-                    pressure
-                </span>
-                <span>
-                    {
-                        utils.getPressure(utils.getAveragePressure(data), lang, true)
-                    }
-                </span>
+            <div className={styles.boxWrap}>
+                <div className={styles.box}>
+                    <span className={styles.subtitle}>
+                        pressure
+                    </span>
+                    <span className={styles.value}>
+                        {
+                            utils.getPressure(utils.getAveragePressure(data), lang, true)
+                        }
+                    </span>
+                </div>
+                <div className={styles.box}>
+                    <span className={styles.subtitle}>
+                        visibility
+                    </span>
+                    <span className={styles.value}>
+                        {
+                            utils.getVisibility(utils.getAverageVisibility(data), lang, true)
+                        }
+                    </span>
+                </div>
+                <div className={styles.box}>
+                    <span className={styles.subtitle}>
+                        humidity
+                    </span>
+                    <span className={styles.value}>
+                        {
+                            utils.getHumidity(utils.getAverageHumidity(data), lang, true)
+                        }
+                    </span>
+                </div>
             </div>
-            <div>
-                <span>
-                    visibility
-                </span>
-                <span>
-                    {
-                        utils.getVisibility(utils.getAverageVisibility(data), lang, true)
-                    }
-                </span>
-            </div>
-            <div>
-                <span>
-                    humidity
-                </span>
-                <span>
-                    {
-                        utils.getHumidity(utils.getAverageHumidity(data), lang, true)
-                    }
-                </span>
-            </div>
-            <ul>
+            <ul className={styles.list}>
                 {
                     data.map((forecast) => (
                         <li
                             key={forecast.dt_txt}
+                            className={styles.item}
                         >
                             <img 
+                                className={styles.img}
                                 src={utils.getWeatherIconSrc(forecast.weather[0].icon)} 
                                 alt="weather icon"
                             />
-                            <span>
-                                {utils.getTemp(forecast.main.temp, lang, true)}
+                            <span className={styles.temp}>
+                                {utils.getTemp(forecast.main.temp, units)}
                             </span>
-                            <span>
-                                {utils.getHours(new Date(forecast.dt * 1000), lang)}
+                            <span className={styles.hours}>
+                                {`${utils.getHours(forecast.dt, lang)}:00`}
                             </span>
                         </li>
                     ))

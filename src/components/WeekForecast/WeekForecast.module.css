@@ -1,0 +1,53 @@
+.title {
+	composes: subtitle from '../../Styles/Types.module.css';
+	composes: semistrong from '../../Styles/Types.module.css';
+	margin-bottom: 1rem;
+}
+
+.item {
+	composes: reset from '../../Styles/Button.module.css';
+	display: flex;
+    align-items: center;
+    width: 100%;
+    text-align: left;
+}
+
+.day {
+	composes: common from '../../Styles/Types.module.css';
+	composes: uppercase from '../../Styles/Types.module.css';
+	flex: 0 0 5em;
+}
+
+.tempWrap {
+	flex: 0 0 6em;
+}
+
+.maxTemp {
+	composes: strong from '../../Styles/Types.module.css';
+	margin-right: 0.5rem;
+}
+
+.minTemp {
+	composes: common from '../../Styles/Types.module.css';
+	font-size: 0.9em;
+}
+
+.descriptionWrap {
+	display: flex;
+	align-items: center;
+	flex: 1 1 10em;
+}
+
+.img {
+	composes: img from '../../Styles/Image.module.css';
+	width: 1.5em;
+	margin-right: 0.5rem;
+}
+
+.description {
+	composes: common from '../../Styles/Types.module.css';
+	composes: capitalize from '../../Styles/Types.module.css';
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}

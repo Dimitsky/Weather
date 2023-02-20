@@ -6,7 +6,9 @@ import styles from './Root.module.css';
 export default function Root() {
     return (
         <div className={styles.container}>
-            <NavBar className={styles.burger} />
+            <header className={styles.header}>
+                <NavBar className={styles.burger} />
+            </header>
             <Outlet />
         </div>
     )

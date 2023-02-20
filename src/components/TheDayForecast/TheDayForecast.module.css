@@ -9,3 +9,64 @@
     composes: strong from '../../Styles/Types.module.css';
     margin-bottom: 1em;
 }
+
+.boxWrap {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 3em;
+}
+
+.box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.box:not(:last-child) {
+    margin-right: 1em;
+}
+
+.subtitle {
+    composes: common from '../../Styles/Types.module.css';
+    composes: semistrong from '../../Styles/Types.module.css';
+    margin-bottom: 0.2rem;
+    text-transform: capitalize;
+}
+
+.value {
+    composes: strong from '../../Styles/Types.module.css';
+    color: var(--grey-7);
+    font-size: 1.1em;
+}
+
+.list {
+    composes: reset from '../../Styles/List.module.css';
+    display: flex;
+    overflow: auto;
+}
+
+.item:not(:last-child) {
+    margin-right: 1rem;
+}
+
+.item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 1em;
+}
+
+.img {
+    width: 3em;
+}
+
+.temp {
+    composes: semiStrong from '../../Styles/Types.module.css';
+    margin-bottom: 0.5rem;
+    font-size: 1.2em;
+}
+
+.hours {
+    composes: common from '../../Styles/Types.module.css';
+    font-size: 0.9em;
+}

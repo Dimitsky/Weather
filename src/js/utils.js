@@ -1,4 +1,4 @@
-import { LANG, PRESSURE_PREFIX, VISIBILITY_PREFIX, HUMIDITY_PREFIX } from "./consts";
+import { LANG, PRESSURE_PREFIX, VISIBILITY_PREFIX, HUMIDITY_PREFIX, UNITS } from "./consts";
 
 const utils = {
     /*
@@ -131,11 +131,12 @@ const utils = {
     }, 
 
 
-    getTemp(temp, lang, prefix = false) {
-        switch (lang) {
-            case LANG.RU:
-            case LANG.EN:
-                return prefix ? temp.toFixed(0) + '°' : temp.toFixed(0) + '°';
+    getTemp(temp, units, prefix = false) {
+        switch (units) {
+            case UNITS.IMPERIAL:
+                return prefix ? temp.toFixed(0) + '°' + 'F' : temp.toFixed(0) + '°';
+            case UNITS.METRIC:
+                return prefix ? temp.toFixed(0) + '°' + 'C' : temp.toFixed(0) + '°';
         }
     }, 
 
@@ -148,7 +149,7 @@ const utils = {
             }
         });
 
-        return max.toFixed(0)
+        return max
     }, 
 
     getMinTemp(data) {
@@ -160,7 +161,7 @@ const utils = {
             }
         });
 
-        return min.toFixed(0)
+        return min
     }
 }
 

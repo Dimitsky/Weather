@@ -2,10 +2,9 @@
     composes: container from '../../Styles/Container.module.css';
 }
 
-.burger {
-    position: absolute;
-    top: 0.75rem;
-    right: 0.75rem;
+.header {
+    display: flex;
+    justify-content: flex-end;
 }
 
 @media screen and (min-width: 768px) {

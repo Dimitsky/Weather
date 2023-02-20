@@ -1,0 +1,24 @@
+.list {
+  composes: reset from '../../Styles/List.module.css';
+}
+
+.item:not(:last-child) {
+  margin-bottom: 1rem;
+}
+
+.trigger {
+  composes: reset from '../../Styles/Button.module.css';
+  display: flex;
+  align-items: center;
+  width: 100%;
+  text-align: left;
+}
+
+.content {
+  margin-top: 1em;
+}
+
+.icon {
+	width: 0.7rem;
+	color: var(--grey-6);
+}

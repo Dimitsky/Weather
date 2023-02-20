@@ -39,7 +39,7 @@ export default function HomePage() {
         const now = new Date();
         const tomorrow = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
 
-        const todayForecast = forecastWeather.list.filter((forecast) => new Date(forecast.dt * 1000) <= tomorrow);
+        let todayForecast = forecastWeather.list.filter((forecast) => new Date(forecast.dt * 1000) <= tomorrow);
 
         return (
             <>
@@ -57,16 +57,16 @@ export default function HomePage() {
                 <NowForecast data={nowWeather} />
 
                 {/* TODAY */}
-                <TheDayForecast 
-                    data={todayForecast} 
+                {/* <TheDayForecast 
+                    data={todayForecast.length || nowWeather} 
                     title="Сегодня"
-                />
+                /> */}
 
                 {/* WEEK */}
                 <WeekForecast data={forecastWeather} />
 
                 {/* SUN */}
-                <Sun data={nowWeather} />
+                {/* <Sun data={nowWeather} /> */}
             </>
         )
     }

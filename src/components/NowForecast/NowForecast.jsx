@@ -4,7 +4,7 @@ import utils from '../../js/utils';
 import styles from './NowForecast.module.css';
 
 export default function NowForecast({ className, data, ...restProps }) {
-    const lang = useSelector((state) => state.lang);
+    const units = useSelector((state) => state.units);
     
     return (
         <div
@@ -17,7 +17,7 @@ export default function NowForecast({ className, data, ...restProps }) {
                 alt="" 
             />
             <span className={styles.temp}>
-                {utils.getTemp(data.main.temp, lang)}
+                {utils.getTemp(data.main.temp, units, true)}
             </span>
             <span className={styles.description}>
                 {data.weather[0].description}

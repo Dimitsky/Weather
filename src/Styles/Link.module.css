@@ -1,0 +1,10 @@
+.link {
+	color: var(--grey-7);
+	transition: color var(--transition-duration) var(--transition-timing-function);
+}
+
+@media screen and (min-width: 992px) {
+	.link:hover {
+		color: var(--linkHover);
+	}
+}
