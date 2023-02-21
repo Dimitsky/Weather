@@ -6,3 +6,22 @@
     font-size: inherit;
     background: none;
 }
+
+.button {
+    composes: reset;
+    --size: 44px;
+    border-radius: 0.75rem;
+    width: var(--size);
+    height: var(--size);
+}
+
+.button:active {
+    transform: translateY(3px) scale(0.9);
+}
+
+@media screen and (min-width: 992px) {
+    .button:hover {
+        background-color: var(--grey-1);
+        cursor: pointer;
+    }
+}

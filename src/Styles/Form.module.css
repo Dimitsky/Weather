@@ -1,0 +1,10 @@
+.text {
+    composes: common from './Types.module.css';
+    flex: 1;
+    border-radius: 0.75rem;
+    border: none;
+    padding: 0.5rem 1rem;
+    font-family: inherit;
+    font-size: 1em;
+    background: var(--grey-1);
+}

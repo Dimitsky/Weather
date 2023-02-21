@@ -1,21 +1,26 @@
 :root {
-  box-sizing: border-box;
-  font-family: 'Source Sans Pro', sans-serif;
+	box-sizing: border-box;
+	font-family: 'Source Sans Pro', sans-serif;
 }
 
 *, 
 ::after, 
 ::before {
-  box-sizing: inherit;
+	box-sizing: inherit;
+}
+
+*:focus-visible {
+	box-shadow: 0 0 0 1px #000, 0 0 0 2px #fff;
+	outline: none;
 }
 
 body {
-  margin: 0;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+	margin: 0;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+	monospace;
 }

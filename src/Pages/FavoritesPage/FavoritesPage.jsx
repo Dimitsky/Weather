@@ -1,13 +1,20 @@
 import Search from "../../components/Search/Search";
-import LocationMini from '../../components/LocationMini/LocationMini';
-
-import styles from './FavoritesPage.module.css';
+import PreviewWeather from '../../components/PreviewWeather/PreviewWeather';
 import useFavorites from "../../hooks/useFavorites";
 import PageLoader from "../../components/PageLoader/PageLoader";
 import PageError from "../../components/PageError/PageError";
 
+import styles from './FavoritesPage.module.css';
+import { useEffect, useState } from "react";
+import { IconPencilFill } from "../../components/Icon/Icon";
+
 export default function FavoritesPage() {
     const { data, error, status } = useFavorites();
+    const [ editMode, setEditMode ] = useState(false);
+
+    const haandleToggleEditMode = () => {
+        setEditMode(!editMode);
+    }
 
     if (status === 'loading') {
         return (
@@ -23,8 +30,15 @@ export default function FavoritesPage() {
 
     if (status === 'success') {
         return (
-            <>
-                <Search />
+            <div className={styles.wrap}>
+                <Search className={styles.search}/>
+                <button
+                    className={styles.editBtn}
+                    aria-label="Редактировать избранное"
+                    onClick={haandleToggleEditMode}
+                >
+                    <IconPencilFill className={editMode ? [styles.iconPencil, styles.iconPencilActive].join(' ') : styles.iconPencil}/>
+                </button>
                 {
                     data.length ? (
                         <ul className={styles.list}>
@@ -32,8 +46,12 @@ export default function FavoritesPage() {
                                 data.map((fav) => (
                                     <li
                                         key={fav.coord.lat + fav.coord.lon}
+                                        className={styles.item}
                                     >
-                                        <LocationMini data={fav} />
+                                        <PreviewWeather 
+                                            data={fav} 
+                                            editMode={editMode}
+                                        />
                                     </li>
                                 ))
                             }
@@ -42,7 +60,7 @@ export default function FavoritesPage() {
                         null
                     )
                 }
-            </>
+            </div>
         )
     }
 }

@@ -11,6 +11,9 @@ export default function NavBar({ className, ...restProps}) {
     const handleToggleMenu = () => {
         setIsOpen(!isOpen);
     }
+    const handleOnClickLink = () => {
+        setIsOpen(false);
+    }
 
     useEffect(() => {
         if (!isOpen) return;
@@ -58,6 +61,7 @@ export default function NavBar({ className, ...restProps}) {
                                     <NavLink 
                                         className={({ isActive }) => isActive ? [styles.link, styles.activeLink].join(' ') : styles.link}
                                         to="/"
+                                        onClick={handleOnClickLink}
                                     >
                                         Домой
                                     </NavLink>
@@ -66,6 +70,7 @@ export default function NavBar({ className, ...restProps}) {
                                     <NavLink 
                                         className={({ isActive }) => isActive ? [styles.link, styles.activeLink].join(' ') : styles.link}
                                         to="/favorites"
+                                        onClick={handleOnClickLink}
                                     >
                                         Избранное
                                     </NavLink>

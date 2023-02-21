@@ -1,0 +1,37 @@
+.inputWrap {
+    display: flex;
+    align-items: center;
+}
+
+.input {
+    composes: text from '../../Styles/Form.module.css';
+}
+
+.cancel {
+    composes: link from '../../Styles/Link.module.css';
+    margin-left: 1em;
+    text-decoration: none;
+}
+
+/* 
+    Как управлять порядком иморта при композиции модульных стилей?
+    Нужно чтобы сперва сбрасывались стили у списка, а потом срабатывали отступы от класса box (порядок композиции ничего не меняет)
+*/
+/* .list {
+    composes: reset from '../../Styles/List.module.css';
+    composes: box from '../../Styles/Container.module.css';
+} */
+
+.list {
+    composes: box from '../../Styles/Container.module.css';
+    margin-top: 0;
+    margin-bottom: 0;
+    list-style: none;
+}
+
+.link {
+    composes: link from '../../Styles/Link.module.css';
+    display: block;
+    padding: 0.5em 0;
+    text-decoration: none;
+}

@@ -1,0 +1,76 @@
+.wrap {
+    display: flex;
+    align-items: center;
+}
+
+.btn {
+    composes: reset from '../../Styles/Button.module.css';
+    composes: button from '../../Styles/Button.module.css';
+}
+
+.body {
+    composes: box from '../../Styles/Container.module.css';
+    composes: reset from '../../Styles/Link.module.css';
+    display: grid;
+    flex: 1;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: min-content 2em; 
+    grid-template-areas: 
+        'location temp'
+        'time temp'
+        'description current';
+    border-radius: 0.75rem;
+    background: var(--grey-2);
+}
+
+.name {
+    composes: subtitle from '../../Styles/Types.module.css';
+    grid-area: location;
+    line-height: 1;
+}
+
+.temp {
+    composes: title from '../../Styles/Types.module.css';
+    grid-area: temp;
+    font-size: 2em;
+    line-height: 1;
+    text-align: right;
+}
+
+.time, 
+.description {
+    composes: common from '../../Styles/Types.module.css';
+    font-size: 0.9em;
+}
+
+.time {
+    grid-area: time;
+}
+
+.description {
+    grid-area: description;
+}
+
+.currentLocation {
+    composes: common from '../../Styles/Types.module.css';
+    grid-area: current;
+    font-size: 0.8em;
+}
+
+.btnWrap {
+    display: flex;
+    flex-direction: column;
+    margin-right: 0.75rem;
+}
+
+.iconCancel {
+    color: var(--danger);
+}
+
+.iconGeo {
+    color: var(--grey-5);
+}
+
+.iconGeoActive {
+    color: var(--primary);
+}

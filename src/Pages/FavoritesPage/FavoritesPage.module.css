@@ -1,0 +1,38 @@
+.wrap {
+    display: flex;
+    flex-direction: column;
+}
+
+.search {
+    margin-bottom: 1rem;
+}
+
+.list {
+    composes: reset from '../../Styles/List.module.css';
+}
+
+.item:not(:last-child) {
+    margin-bottom: 1rem;
+}
+
+.editBtn {
+    composes: button from '../../Styles/Button.module.css';
+    align-self: flex-end;
+    margin-bottom: 1rem;
+}
+
+.iconPencil {
+    color: var(--grey-5);
+}
+
+.iconPencilActive {
+    color: var(--primary);
+}
+
+@media screen and (min-width: 992px) {
+    .list {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+    }
+}

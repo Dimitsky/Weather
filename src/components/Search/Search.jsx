@@ -17,7 +17,12 @@ function SearchForwardRef({ className }, ref) {
     const handleChange = (e) => {
         setInputValue(e.target.value);
     }
-    
+    const handleCancel = (e) => {
+        setSearchResult(null);
+        setInputValue('');
+        e.preventDefault();
+    }
+
     useEffect(() => {
         if (!debounceValue) return
 
@@ -25,7 +30,6 @@ function SearchForwardRef({ className }, ref) {
         
         api.get(debounceValue)
             .then((result) => {
-                console.log(result)
                 setSearchResult(result.suggestions);
             })
             .catch((error) => {
@@ -37,14 +41,28 @@ function SearchForwardRef({ className }, ref) {
         <div
             className={className ? [styles.wrapper, className].join(' ') : styles.wrapper}
         >
-            <input
-                className={styles.input}
-                ref={ref}
-                type="text" 
-                name="search"
-                value={inputValue}
-                onChange={handleChange}
-            />
+            <div className={styles.inputWrap}>
+                <input
+                    className={styles.input}
+                    ref={ref}
+                    type="text" 
+                    name="search"
+                    value={inputValue}
+                    placeholder="Поиск города"
+                    onChange={handleChange}
+                />
+                {
+                    searchResult && (
+                        <a 
+                            className={styles.cancel}
+                            href="#"
+                            onClick={handleCancel}
+                        >
+                            Отмена
+                        </a>
+                    )
+                }
+            </div>
             {
                 searchResult && (
                     <ul className={styles.list}>
@@ -56,7 +74,7 @@ function SearchForwardRef({ className }, ref) {
                                         key={suggestion.value}
                                     >
                                         <Link 
-                                            className={styles.searchLink}
+                                            className={styles.link}
                                             to={`/location?lat=${suggestion.data.geo_lat}&lon=${suggestion.data.geo_lon}`}
                                             // onClick={() => handleOnClickSearchLink(suggestion)}
                                         >
