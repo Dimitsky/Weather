@@ -162,6 +162,68 @@ const utils = {
         });
 
         return min
+    }, 
+
+    getMonthName(unixTimestamp, lang) {
+        const monthNumber = new Date(unixTimestamp * 1000).getMonth();
+
+        switch (lang) {
+            case LANG.RU:
+                switch (monthNumber) {
+                    case 0:
+                        return 'Январь'
+                    case 1:
+                        return 'Февраль'
+                    case 2:
+                        return 'Март'
+                    case 3:
+                        return 'Апрель'
+                    case 4:
+                        return 'Май'
+                    case 5:
+                        return 'Июнь'
+                    case 6:
+                        return 'Июль'
+                    case 7:
+                        return 'Август'
+                    case 8:
+                        return 'Сентябрь'
+                    case 9:
+                        return 'Октябрь'
+                    case 10:
+                        return 'Ноябрь'
+                    case 11:
+                        return 'Декабрь'
+                }
+            case LANG.EN:
+            default:
+                switch (monthNumber) {
+                    case 0:
+                        return 'January'
+                    case 1:
+                        return 'February'
+                    case 2:
+                        return 'March'
+                    case 3:
+                        return 'April'
+                    case 4:
+                        return 'May'
+                    case 5:
+                        return 'June'
+                    case 6:
+                        return 'July'
+                    case 7:
+                        return 'August'
+                    case 8:
+                        return 'September'
+                    case 9:
+                        return 'October'
+                    case 10:
+                        return 'November'
+                    case 11:
+                        return 'December'
+                }
+        }
     }
 }
 

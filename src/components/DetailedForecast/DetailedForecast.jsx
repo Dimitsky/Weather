@@ -1,9 +1,9 @@
 import { useSelector } from 'react-redux';
 import utils from '../../js/utils';
 
-import styles from './TheDayForecast.module.css';
+import styles from './DetailedForecast.module.css';
 
-export default function TheDayForecast({ className, data, title, ...restProps }) {
+export default function DetailedForecast({ className, data, title, ...restProps }) {
     const lang = useSelector((state) => state.lang);
     const units = useSelector((state) => state.units);
 
@@ -22,7 +22,7 @@ export default function TheDayForecast({ className, data, title, ...restProps })
             <div className={styles.boxWrap}>
                 <div className={styles.box}>
                     <span className={styles.subtitle}>
-                        pressure
+                        давление
                     </span>
                     <span className={styles.value}>
                         {
@@ -32,7 +32,7 @@ export default function TheDayForecast({ className, data, title, ...restProps })
                 </div>
                 <div className={styles.box}>
                     <span className={styles.subtitle}>
-                        visibility
+                        видимость
                     </span>
                     <span className={styles.value}>
                         {
@@ -42,7 +42,7 @@ export default function TheDayForecast({ className, data, title, ...restProps })
                 </div>
                 <div className={styles.box}>
                     <span className={styles.subtitle}>
-                        humidity
+                        влажность
                     </span>
                     <span className={styles.value}>
                         {

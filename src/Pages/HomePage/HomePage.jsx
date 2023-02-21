@@ -1,20 +1,20 @@
 import { useSelector } from 'react-redux';
-import TheDayForecast from '../../components/TheDayForecast/TheDayForecast';
-import NowForecast from '../../components/NowForecast/NowForecast';
+import CurrentWeather from '../../components/CurrentWeather/CurrentWeather';
 import PageError from '../../components/PageError/PageError';
 import PageLoader from '../../components/PageLoader/PageLoader';
 import useWeather from '../../hooks/useWeather';
 import utils from '../../js/utils';
-import WeekForecast from '../../components/WeekForecast/WeekForecast';
+import DailyForecast from '../../components/DailyForecast/DailyForecast';
 import Sun from '../../components/Sun/Sun';
 
 import styles from './HomePage.module.css';
+import DetailedForecast from '../../components/DetailedForecast/DetailedForecast';
 
 export default function HomePage() {
     const lang = useSelector((state) => state.lang);
     const currentLocation = useSelector(state => state.currentLocation);
     
-    const { data: nowWeather, error: nowWeatherError, status: nowWeatherStatus } = useWeather({
+    const { data: currentWeather, error: currentWeatherError, status: currentWeatherStatus } = useWeather({
         ...currentLocation, 
         weatherType: 'weather', 
     });
@@ -23,28 +23,28 @@ export default function HomePage() {
         weatherType: 'forecast', 
     });
 
-    if (nowWeatherStatus === 'loading' || forecastWeatherStatus === 'loading') {
+    if (currentWeatherStatus === 'loading' || forecastWeatherStatus === 'loading') {
         return (
             <PageLoader />
         )
     }
 
-    if (nowWeatherStatus === 'error' || forecastWeatherStatus === 'error') {
+    if (currentWeatherStatus === 'error' || forecastWeatherStatus === 'error') {
         return (
-            <PageError error={nowWeatherError || forecastWeatherError} />
+            <PageError error={currentWeatherError || forecastWeatherError} />
         )
     }
 
-    if (nowWeatherStatus === 'success' && forecastWeatherStatus === 'success') {
+    if (currentWeatherStatus === 'success' && forecastWeatherStatus === 'success') {
         const now = new Date();
         const tomorrow = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
 
-        let todayForecast = forecastWeather.list.filter((forecast) => new Date(forecast.dt * 1000) <= tomorrow);
+        let today = forecastWeather.list.filter((forecast) => new Date(forecast.dt * 1000) <= tomorrow);
 
         return (
             <>
                 <h2 className={styles.name}>
-                    {nowWeather.name}
+                    {currentWeather.name}
                 </h2>
                 <span className={styles.day}>
                     {`${utils.getTheDayOfWeek(now, lang)}, `}
@@ -52,21 +52,39 @@ export default function HomePage() {
                 <span className={styles.hours}>
                     {utils.getHours(now / 1000, lang, true)}
                 </span>
+                <div className={styles.content}>
+                    {/* NOW */}
+                    <CurrentWeather 
+                        className={styles.current}
+                        data={currentWeather} 
+                    />
 
-                {/* NOW */}
-                <NowForecast data={nowWeather} />
+                    {/* TODAY */}
+                    {
+                        today.length ? (
+                            <DetailedForecast 
+                                className={styles.today}
+                                data={today}
+                                title="Сегодня"
+                            />
+                        ) : (
+                            null
+                        )
+                    }
 
-                {/* TODAY */}
-                {/* <TheDayForecast 
-                    data={todayForecast.length || nowWeather} 
-                    title="Сегодня"
-                /> */}
+                    {/* DAILY */}
+                    <DailyForecast 
+                        className={styles.daily}
+                        data={forecastWeather} 
+                    />
 
-                {/* WEEK */}
-                <WeekForecast data={forecastWeather} />
+                    {/* SUN */}
+                    <Sun 
+                        className={styles.sun}
+                        data={currentWeather} 
+                    />
+                </div>
 
-                {/* SUN */}
-                {/* <Sun data={nowWeather} /> */}
             </>
         )
     }

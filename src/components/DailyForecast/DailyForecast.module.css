@@ -1,6 +1,6 @@
 .title {
 	composes: subtitle from '../../Styles/Types.module.css';
-	composes: semistrong from '../../Styles/Types.module.css';
+	composes: strong from '../../Styles/Types.module.css';
 	margin-bottom: 1rem;
 }
 
@@ -34,8 +34,9 @@
 
 .descriptionWrap {
 	display: flex;
-	align-items: center;
-	flex: 1 1 10em;
+    align-items: center;
+    padding-right: 0.75rem;
+    overflow: hidden;
 }
 
 .img {

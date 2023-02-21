@@ -1,11 +1,11 @@
 import { useSelector } from 'react-redux';
 import utils from '../../js/utils';
-import TheDayForecast from '../TheDayForecast/TheDayForecast';
+import TheDayForecast from '../DetailedForecast/DetailedForecast';
 import { Accordion, AccordionItem } from '../Accordion/Accordion';
 
-import styles from './WeekForecast.module.css';
+import styles from './DailyForecast.module.css';
 
-export default function WeekForecast({ className, data, ...restProps }) {
+export default function DailyForecast({ className, data, ...restProps }) {
     const lang = useSelector((state) => state.lang);
     const units = useSelector((state) => state.units);
     const dailyForecast = {};
@@ -63,14 +63,11 @@ export default function WeekForecast({ className, data, ...restProps }) {
                                     </div>
                                 }
                                 content={
-                                    <div 
-                                        className={styles.body}
-                                    >
-                                        <TheDayForecast 
-                                            key={dailyForecast[key][0].dt} 
-                                            data={dailyForecast[key]}
-                                        />
-                                    </div>
+                                    <TheDayForecast 
+                                        key={dailyForecast[key][0].dt} 
+                                        data={dailyForecast[key]}
+                                        title={utils.getMonthName(dailyForecast[key][0].dt, lang) + ', ' + new Date(dailyForecast[key][0].dt * 1000).getDate()}
+                                    />
                                 }
                             />
                     ))

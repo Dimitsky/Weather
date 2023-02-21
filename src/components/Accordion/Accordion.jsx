@@ -39,7 +39,7 @@ function AccordionItem({ className, itemKey, title, content, ...restProps }) {
 			{...restProps}
 		>
 			<button
-				className={styles.trigger}
+				className={acc[itemKey] ? [styles.trigger, styles.triggerActive].join(' ') : styles.trigger}
 				aria-expanded={acc[itemKey] ? true : false}
 				aria-controls={`content-${itemKey}`}
 				onClick={handleToggleContent}

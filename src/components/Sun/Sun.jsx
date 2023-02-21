@@ -10,23 +10,23 @@ export default function Sun({ className, data, ...restProps }) {
 
     return (
         <div
-            className={className ? [styles.wrapper, className].join(' ') : styles.wrapper}
+            className={className ? [styles.wrap, className].join(' ') : styles.wrap}
             {...restProps}
         >
-            <h2>
+            <h2 className={styles.title}>
                 Солнце
             </h2>
-            <div>
-                <h3>
+            <div className={styles.inner}>
+                <h3 className={styles.subtitle}>
                     Восход
                 </h3>
-                <span>
+                <span className={styles.value}>
                     {`${utils.getHours(sunriseUnixTimestamp, lang)}:${utils.getMinutes(sunriseUnixTimestamp)}`}
                 </span>
-                <h3>
+                <h3 className={styles.subtitle}>
                     Заход
                 </h3>
-                <span>
+                <span className={styles.value}>
                     {`${utils.getHours(sunsetUnixTimeStamp, lang)}:${utils.getMinutes(sunsetUnixTimeStamp)}`}
                 </span>
             </div>

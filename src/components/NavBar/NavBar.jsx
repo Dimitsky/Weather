@@ -1,14 +1,35 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import FocusTrap from '../FocusTrap/FocusTrap';
 
 import styles from './NavBar.module.css';
 
 export default function NavBar({ className, ...restProps}) {
     const [ isOpen, setIsOpen ] = useState(false);
+    const triggerRef = useRef(null);
 
     const handleToggleMenu = () => {
         setIsOpen(!isOpen);
     }
+
+    useEffect(() => {
+        if (!isOpen) return;
+
+        const burgerEl = triggerRef.current;
+
+        const handler = (e) => {
+            if (e.code === 'Escape') {
+                setIsOpen(false);
+            }
+        }
+
+        window.document.documentElement.addEventListener('keydown', handler);
+
+        return () => {
+            window.document.documentElement.removeEventListener('keydown', handler);
+            burgerEl.focus();
+        }
+    }, [isOpen]);
 
     return (
         <div
@@ -16,9 +37,10 @@ export default function NavBar({ className, ...restProps}) {
             {...restProps}
         >
             <button
-                className={styles.burger}
+                className={isOpen ? [styles.burger, styles.burgerActive].join(' ') : styles.burger}
                 aria-expanded={isOpen}
                 aria-controls='menu'
+                ref={triggerRef}
                 onClick={handleToggleMenu}
             >
                 <span className={styles.first}></span>
@@ -26,29 +48,31 @@ export default function NavBar({ className, ...restProps}) {
             </button>
             {
                 isOpen && (
-                    <div className={styles.inner}>
-                        <ul
-                            className={styles.menu}
-                            id="menu"
-                        >
-                            <li className={styles.item}>
-                                <NavLink 
-                                    className={({ isActive }) => isActive ? [styles.link, styles.activeLink].join(' ') : styles.link}
-                                    to="/"
-                                >
-                                    Домой
-                                </NavLink>
-                            </li>
-                            <li className={styles.item}>
-                                <NavLink 
-                                    className={({ isActive }) => isActive ? [styles.link, styles.activeLink].join(' ') : styles.link}
-                                    to="/favorites"
-                                >
-                                    Избранное
-                                </NavLink>
-                            </li>
-                        </ul>
-                    </div>
+                    <FocusTrap>
+                        <div className={styles.inner}>
+                            <ul
+                                className={styles.menu}
+                                id="menu"
+                            >
+                                <li className={styles.item}>
+                                    <NavLink 
+                                        className={({ isActive }) => isActive ? [styles.link, styles.activeLink].join(' ') : styles.link}
+                                        to="/"
+                                    >
+                                        Домой
+                                    </NavLink>
+                                </li>
+                                <li className={styles.item}>
+                                    <NavLink 
+                                        className={({ isActive }) => isActive ? [styles.link, styles.activeLink].join(' ') : styles.link}
+                                        to="/favorites"
+                                    >
+                                        Избранное
+                                    </NavLink>
+                                </li>
+                            </ul>
+                        </div>
+                    </FocusTrap>
                 )
             }
         </div>

@@ -1,9 +1,9 @@
 import { useSelector } from 'react-redux';
 import utils from '../../js/utils';
 
-import styles from './NowForecast.module.css';
+import styles from './CurrentWeather.module.css';
 
-export default function NowForecast({ className, data, ...restProps }) {
+export default function CurrentWeather({ className, data, ...restProps }) {
     const units = useSelector((state) => state.units);
     
     return (

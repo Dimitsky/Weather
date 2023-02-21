@@ -6,7 +6,10 @@
     right: 0;
     bottom: 0;
     z-index: 9000;
+    display: flex;
+    justify-content: center;
     padding-top: 5rem;
+    text-align: center;
     background: #fff;
 }
 
@@ -16,12 +19,16 @@
 
 .burger {
     composes: reset from '../../Styles/Button.module.css';
-    /* border: 1px solid red; */
+    --size: 44px;
     position: relative;
     z-index: 9010;
-    --size: 44px;
+    border-radius: 0.75rem;
     width: var(--size);
     height: var(--size);
+}
+
+.burgerActive{ 
+    background: var(--grey-1);
 }
 
 .first, 
@@ -56,4 +63,11 @@
 
 .activeLink {
     color: red;
+}
+
+@media screen and (min-width: 992px) {
+    .burger:hover {
+        background: var(--grey-1);
+        cursor: pointer;
+    }
 }

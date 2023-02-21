@@ -8,3 +8,40 @@
     composes: capitalize from '../../Styles/Types.module.css';
     composes: semistrong from '../../Styles/Types.module.css';
 }
+
+.today, 
+.daily {
+    margin-bottom: 1rem;
+}
+
+@media screen and (min-width: 992px) {
+    .content {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        grid-template-areas: 
+            'current today'
+            'sun daily';
+            gap: 1.5rem;
+    }
+
+    .current {
+        grid-area: current;
+    }
+
+    .today, 
+    .daily {
+        margin-bottom: 0;
+    }
+
+    .today {
+        grid-area: today;
+    }
+
+    .daily {
+        grid-area: daily;
+    }
+
+    .sun {
+        grid-area: sun;
+    }
+}

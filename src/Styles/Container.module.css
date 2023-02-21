@@ -1,18 +1,27 @@
-.container {
-    composes: colors from './Colors.module.css';
-    composes: transition from './Transition.module.css';
+.box {
     padding: 0.75rem;
 }
 
+.container {
+    composes: colors from './Colors.module.css';
+    composes: transition from './Transition.module.css';
+    composes: box;
+    max-width: 580px;
+    margin: auto;
+}
+
 @media screen and (min-width: 768px) {
-    .container {
+    .box {
         padding: 1rem;
     }
 }
 
 @media screen and (min-width: 992px) {
+    .box {
+        padding: 1.5rem;
+    }
+    
     .container {
         max-width: 1200px;
-        padding: 1.5rem;
     }
 }
