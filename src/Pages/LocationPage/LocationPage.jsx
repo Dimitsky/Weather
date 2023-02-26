@@ -6,6 +6,12 @@ import useWeather from "../../hooks/useWeather";
 import utils from '../../js/utils';
 import { setCurrentLocation } from "../../redux/currentLocationSlice/currentLocationSlice";
 import { removeCurrentLocation } from "../../redux/currentLocationSlice/currentLocationSlice";
+import DetailedForecast from "../../components/DetailedForecast/DetailedForecast";
+import { IconCancelFill, IconPluslFill } from "../../components/Icon/Icon";
+
+import styles from './LocationPage.module.css';
+import DailyForecast from "../../components/DailyForecast/DailyForecast";
+import Sun from "../../components/Sun/Sun";
 
 export default function Location() {
     const dispatch = useDispatch();
@@ -15,29 +21,29 @@ export default function Location() {
     const { data, error, status } = useWeather({
         lat: searchParams.get('lat'), 
         lon: searchParams.get('lon'), 
-        weatherType: 'weather', 
+        weatherType: 'forecast', 
     })
 
     const handleAddToFavorites = () => {
         dispatch(addFavorites({
-            lat: data.coord.lat, 
-            lon: data.coord.lon, 
+            lat: data.city.coord.lat, 
+            lon: data.city.coord.lon, 
         }));
 
         // Если текущая локация не задана, то сделать текущей новую локацию 
         if (!currentLocation.lat && !currentLocation.lon) {
-            dispatch(setCurrentLocation(data.coord));
+            dispatch(setCurrentLocation(data.city.coord));
         }
     }
 
     const handleRemoveFromFavorites = () => {
         dispatch(removeFavorites({
-            lat: data.coord.lat, 
-            lon: data.coord.lon, 
+            lat: data.city.coord.lat, 
+            lon: data.city.coord.lon, 
         }))
 
         // Если удаляемая локация является текущей, то очистить состояние текущей локации  
-        if (utils.coordsIsEquil(currentLocation, data.coord)) {
+        if (utils.coordsIsEquil(currentLocation, data.city.coord)) {
             dispatch(removeCurrentLocation());
         }
     }
@@ -55,35 +61,62 @@ export default function Location() {
     }
 
     if (status === 'success') {
-        console.log(data);
+        const now = new Date();
+        const tomorrow = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
+
+        let todayForecast = data.list.filter((forecast) => new Date(forecast.dt * 1000) <= tomorrow);
 
         return (
-            <>
+            <div className={styles.wrap}>
+                <h2 className={styles.name}>
+                    {data.city.name}
+                </h2>
                 {
-                    favorites.find((location) => utils.coordsIsEquil(location, data.coord)) ? (
+                    favorites.find((location) => utils.coordsIsEquil(location, data.city.coord)) ? (
                         <button
+                            className={styles.btn}
+                            aria-label="Удалить из избранного"
                             onClick={handleRemoveFromFavorites}
                         >
-                            Удалить из избранного
+                            <IconCancelFill className={[styles.icon, styles.iconCancel].join(' ')}/>
                         </button>
                     ) : (
                         <button
+                            className={styles.btn}
+                            aria-label="Добавить в избранное"
                             onClick={handleAddToFavorites}
                         >
-                            Добавить в избранное
+                            <IconPluslFill className={[styles.icon, styles.iconPlus].join(' ')}/>
                         </button>
                     )
                 }
-                <p>
-                    {data.name}
-                </p>
-                <p>
-                    {data.main.temp}
-                </p>
-                <p>
-                    {data.weather[0].description}
-                </p>
-            </>
+
+                {/* TODAY */}
+                {
+                    todayForecast.length ? (
+                        <DetailedForecast 
+                            className={styles.today}
+                            data={todayForecast} 
+                            title="Сегодня"
+                        />
+                    ) : (
+                        null
+                    )
+                }
+
+                {/* DAILY */}
+                <DailyForecast 
+                    className={styles.daily}
+                    data={data}
+                />
+
+                {/* SUN */}
+                <Sun 
+                    className={styles.sun}
+                    sunriseUnixTimestamp={data.city.sunrise}
+                    sunsetUnixTimeStamp={data.city.sunset}
+                />
+            </div>
         )
     }
 }

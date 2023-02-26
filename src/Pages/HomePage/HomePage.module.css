@@ -19,9 +19,9 @@
         display: grid;
         grid-template-columns: 1fr 2fr;
         grid-template-areas: 
-            'current today'
-            'sun daily';
-            gap: 1.5rem;
+            'current daily'
+            'sun today';
+        gap: 1.5rem;
     }
 
     .current {

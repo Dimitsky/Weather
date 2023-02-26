@@ -1,0 +1,57 @@
+.wrap {
+    display: grid;
+}
+
+.today, 
+.daily {
+    margin-bottom: 1rem;
+}
+
+.name {
+    composes: title from '../../Styles/Types.module.css';
+}
+
+.btn {
+    composes: button from '../../Styles/Button.module.css';
+    justify-self: end;
+}
+
+.iconPlus {
+    color: var(--success);
+}
+
+.iconCancel {
+    color: var(--danger);
+}
+
+@media screen and (min-width: 992px) {
+    .wrap {
+        grid-template-columns: 1fr 2fr;
+        grid-template-areas: 
+            'name add'
+            'sun daily'
+            '. today';
+        gap: 1.5rem;
+    }
+
+    .name {
+        grid-area: name;
+    }
+    
+    .today {
+        grid-area: today;
+        align-self: start;
+    }
+    
+    .sun {
+        grid-area: sun;
+    }
+    
+    .daily {
+        grid-area: daily;
+    }
+    
+    .btn {
+        grid-area: add;
+    }
+}

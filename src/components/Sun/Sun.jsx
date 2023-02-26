@@ -3,10 +3,8 @@ import utils from '../../js/utils';
 
 import styles from './Sun.module.css';
 
-export default function Sun({ className, data, ...restProps }) {
+export default function Sun({ className, sunriseUnixTimestamp, sunsetUnixTimeStamp, ...restProps }) {
     const lang = useSelector((state) => state.lang);
-    const sunriseUnixTimestamp = data.sys.sunrise;
-    const sunsetUnixTimeStamp = data.sys.sunset;
 
     return (
         <div
@@ -21,13 +19,13 @@ export default function Sun({ className, data, ...restProps }) {
                     Восход
                 </h3>
                 <span className={styles.value}>
-                    {`${utils.getHours(sunriseUnixTimestamp, lang)}:${utils.getMinutes(sunriseUnixTimestamp)}`}
+                    {utils.getTime(sunriseUnixTimestamp, lang)}
                 </span>
                 <h3 className={styles.subtitle}>
                     Заход
                 </h3>
                 <span className={styles.value}>
-                    {`${utils.getHours(sunsetUnixTimeStamp, lang)}:${utils.getMinutes(sunsetUnixTimeStamp)}`}
+                    {utils.getTime(sunsetUnixTimeStamp, lang)}
                 </span>
             </div>
         </div>

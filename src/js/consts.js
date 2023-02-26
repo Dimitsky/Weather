@@ -19,8 +19,16 @@ const PRESSURE_PREFIX = {
 }
 
 const VISIBILITY_PREFIX = {
-    IMPERIAL: 'Mi', 
-    METRIC: 'Km', 
+    IMPERIAL: {
+        [LANG.RU]: 'Миль', 
+        [LANG.UA]: 'Миль', 
+        [LANG.EN]: 'Mi', 
+    }, 
+    METRIC: {
+        [LANG.RU]: 'Км', 
+        [LANG.UA]: 'Км', 
+        [LANG.EN]: 'Km', 
+    }, 
 }
 
 const HUMIDITY_PREFIX = {

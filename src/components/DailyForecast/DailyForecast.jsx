@@ -13,11 +13,13 @@ export default function DailyForecast({ className, data, ...restProps }) {
     // 
     data.list.forEach((forecast) => {
         const dt = new Date(forecast.dt * 1000);
-
-        if (dailyForecast[dt.getMonth() + '' + dt.getDate()]) {
-            dailyForecast[dt.getMonth() + '' + dt.getDate()].push(forecast);
+        const month = dt.getMonth();
+        const date = dt.getDate() < 10 ? '0' + dt.getDate() : dt.getDate();
+        
+        if (dailyForecast[month + date]) {
+            dailyForecast[month + date].push(forecast);
         } else {
-            dailyForecast[dt.getMonth() + '' + dt.getDate()] = [forecast];
+            dailyForecast[month + date] = [forecast];
         }
     })
 

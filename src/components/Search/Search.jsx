@@ -24,7 +24,13 @@ function SearchForwardRef({ className }, ref) {
     }
 
     useEffect(() => {
-        if (!debounceValue) return
+        if (!debounceValue) {
+            if (searchResult) {
+                setSearchResult(null);
+            }
+            
+            return
+        }
 
         const api = new ApiSuggestions(DADATA_SUGGESTIONS_TOKEN, DADATA_SUGGESTIONS_BASE_URL);
         
@@ -75,8 +81,7 @@ function SearchForwardRef({ className }, ref) {
                                     >
                                         <Link 
                                             className={styles.link}
-                                            to={`/location?lat=${suggestion.data.geo_lat}&lon=${suggestion.data.geo_lon}`}
-                                            // onClick={() => handleOnClickSearchLink(suggestion)}
+                                            to={`/location?lat=${parseFloat(suggestion.data.geo_lat).toFixed(3)}&lon=${parseFloat(suggestion.data.geo_lon).toFixed(3)}`}
                                         >
                                             {suggestion.value}
                                         </Link>

@@ -38,7 +38,7 @@
     border-radius: 2px;
     display: block;
     height: 2px;
-    background: var(--grey-4);
+    background: var(--grey-5);
     transition: transform 500ms ease;
 }
 

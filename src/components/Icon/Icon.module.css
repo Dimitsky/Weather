@@ -1,3 +1,15 @@
 .icon {
-    width: 1em;
+    width: 1rem;
+}
+
+@media screen and (min-width: 768px) {
+    .icon {
+        width: 1.25rem;
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .icon {
+        width: 1.5rem;
+    }
 }

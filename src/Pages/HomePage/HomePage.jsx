@@ -50,7 +50,7 @@ export default function HomePage() {
                     {`${utils.getTheDayOfWeek(now, lang)}, `}
                 </span>
                 <span className={styles.hours}>
-                    {utils.getHours(now / 1000, lang, true)}
+                    {utils.getTime(Date.now() / 1000, lang)}
                 </span>
                 <div className={styles.content}>
                     {/* NOW */}
@@ -81,7 +81,8 @@ export default function HomePage() {
                     {/* SUN */}
                     <Sun 
                         className={styles.sun}
-                        data={currentWeather} 
+                        sunriseUnixTimestamp={currentWeather.sys.sunrise}
+                        sunsetUnixTimeStamp={currentWeather.sys.sunset}
                     />
                 </div>
 

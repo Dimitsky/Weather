@@ -21,7 +21,7 @@ export default function useFavorites() {
     }
 
     return useQuery({
-        queryKey: ['favorites'], 
+        queryKey: ['favorites', {lang, units}], 
         queryFn: handler, 
         refetchOnWindowFocus: false, 
     })

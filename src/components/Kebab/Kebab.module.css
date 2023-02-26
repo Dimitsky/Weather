@@ -1,0 +1,44 @@
+.wrap {
+    position: relative;
+}
+
+.trigger {
+    composes: button from '../../Styles/Button.module.css';
+    display: grid;
+}
+
+.icon {
+    width: 1.5em;
+    margin: auto;
+    color: var(--grey-5);
+}
+
+.list {
+    position: absolute;
+    z-index: 8000;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding: 0.4rem 0.75rem;
+    list-style: none;
+    border-radius: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    box-shadow: 0 0 10px 0 rgba(0 0 0 / 0.2);
+}
+
+.br {
+    border-bottom: 2px solid var(--grey-2);
+    margin-bottom: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+
+.btn {
+    composes: button from '../../Styles/Button.module.css';
+    composes: common from '../../Styles/Types.module.css';
+    --size: auto;
+    display: block;
+    width: 100%;
+    padding: 0.3rem 0.5rem;
+    text-align: left;
+}

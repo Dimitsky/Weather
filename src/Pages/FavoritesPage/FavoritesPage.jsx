@@ -5,7 +5,7 @@ import PageLoader from "../../components/PageLoader/PageLoader";
 import PageError from "../../components/PageError/PageError";
 
 import styles from './FavoritesPage.module.css';
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { IconPencilFill } from "../../components/Icon/Icon";
 
 export default function FavoritesPage() {
@@ -32,30 +32,32 @@ export default function FavoritesPage() {
         return (
             <div className={styles.wrap}>
                 <Search className={styles.search}/>
-                <button
-                    className={styles.editBtn}
-                    aria-label="Редактировать избранное"
-                    onClick={haandleToggleEditMode}
-                >
-                    <IconPencilFill className={editMode ? [styles.iconPencil, styles.iconPencilActive].join(' ') : styles.iconPencil}/>
-                </button>
                 {
                     data.length ? (
-                        <ul className={styles.list}>
-                            {
-                                data.map((fav) => (
-                                    <li
-                                        key={fav.coord.lat + fav.coord.lon}
-                                        className={styles.item}
-                                    >
-                                        <PreviewWeather 
-                                            data={fav} 
-                                            editMode={editMode}
-                                        />
-                                    </li>
-                                ))
-                            }
-                        </ul>
+                        <>
+                            <button
+                                className={styles.editBtn}
+                                aria-label="Редактировать избранное"
+                                onClick={haandleToggleEditMode}
+                            >
+                                <IconPencilFill className={editMode ? [styles.iconPencil, styles.iconPencilActive].join(' ') : styles.iconPencil}/>
+                            </button>
+                            <ul className={styles.list}>
+                                {
+                                    data.map((fav) => (
+                                        <li
+                                            key={fav.coord.lat + fav.coord.lon}
+                                            className={styles.item}
+                                        >
+                                            <PreviewWeather 
+                                                data={fav} 
+                                                editMode={editMode}
+                                            />
+                                        </li>
+                                    ))
+                                }
+                            </ul>
+                        </>
                     ) : (
                         null
                     )

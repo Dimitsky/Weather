@@ -13,6 +13,7 @@ export default function PreviewWeather({ className, children, data, editMode, ..
     const dispatch = useDispatch();
     const currentLocation = useSelector((state) => state.currentLocation);
     const units = useSelector((state) => state.units);
+    const lang = useSelector((state) => state.lang);
 
     const handleDelete = () => {
         dispatch(removeFavorites(data.coord));
@@ -66,7 +67,7 @@ export default function PreviewWeather({ className, children, data, editMode, ..
             }
             <Link 
                 className={styles.body}
-                to={`/location?lat=${data.coord.lat}&lon=${data.coord.lon}`}
+                to={`/location?lat=${parseFloat(data.coord.lat).toFixed(3)}&lon=${parseFloat(data.coord.lon).toFixed(3)}`}
             >
                 <span className={styles.name}>
                     {data.name}
@@ -75,7 +76,7 @@ export default function PreviewWeather({ className, children, data, editMode, ..
                     {utils.getTemp(data.main.temp, units)}
                 </span>
                 <span className={styles.time}>
-                    {"16:00"}
+                    {utils.getUTCTime(data.dt + data.timezone, lang, true)}
                 </span>
                 <span className={styles.description}>
                     {data.weather[0].description}

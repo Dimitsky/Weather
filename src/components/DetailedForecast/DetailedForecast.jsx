@@ -67,7 +67,7 @@ export default function DetailedForecast({ className, data, title, ...restProps 
                                 {utils.getTemp(forecast.main.temp, units)}
                             </span>
                             <span className={styles.hours}>
-                                {`${utils.getHours(forecast.dt, lang)}:00`}
+                                {utils.getTime(forecast.dt, lang)}
                             </span>
                         </li>
                     ))

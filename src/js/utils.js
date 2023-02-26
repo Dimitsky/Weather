@@ -16,7 +16,7 @@ const utils = {
     }, 
     
     // Возвращает день недели для разных языков
-    getTheDayOfWeek(date, lan = LANG.RU) {
+    getTheDayOfWeek(date, lang = LANG.RU) {
         const d = date.getDay();
         const days = {
             [LANG.RU]: [
@@ -27,6 +27,15 @@ const utils = {
                 'четверг', 
                 'пятница', 
                 'суббота', 
+            ], 
+            [LANG.UA]: [
+                'неділя', 
+                'понеділок', 
+                'вівторок', 
+                'середа', 
+                'четвер', 
+                'п\'ятниця', 
+                'субота', 
             ], 
             [LANG.EN]: [
                 'sunday', 
@@ -39,47 +48,37 @@ const utils = {
             ], 
         }
     
-        return days[lan][d];
+        return days[lang][d];
     }, 
 
     // 
-    getHours(unixTimestamp, lang, prefix = false) {
-        const hours24 = (new Date(unixTimestamp * 1000)).getHours();
+    getTime(unixTimestamp, lang) {
+        const date = new Date(unixTimestamp * 1000);
+        const hours24 = date.getHours();
+        let minutes = date.getMinutes();
+
+        if (!minutes) {
+            minutes = '00';
+        } else if (minutes < 10) {
+            minutes = '0' + minutes;
+        }
 
         switch (lang) {
             case LANG.RU:
-                if (!prefix) {
-                    return hours24
-                } else {
-                    if (hours24 === 1 || hours24 === 21) {
-                        return hours24 + ' час'
-                    } else if ((hours24 >= 2 && hours24 <= 4) || (hours24 >= 22 && hours24 <= 23)) {
-                        return hours24 + ' часа'
-                    } else if (hours24 >= 5 && hours24 <= 20) {
-                        return hours24 + ' часов';
-                    }
-                }
+            case LANG.UA:
+                return hours24 + ':' + minutes;
             case LANG.EN:
                 const hours12 = hours24 % 12 || 12;
 
-                if (!prefix) {
-                    return hours12
-                } else {
-                    return hours24 >= 12 ? hours12 + ' PM' : hours12 + ' AM';
-                }
+                return hours24 >= 12 ? hours12 + ':' + minutes + ' PM' : hours12 + ':' + minutes + ' AM';
         }
     }, 
-
-    getMinutes(unixTimestamp) {
-        const minutes = (new Date(unixTimestamp * 1000)).getMinutes();
-
-        return minutes < 10 ? '0' + minutes : minutes;
-    },
     
     // возвращает давление в гектопаскалях или миллиметрах ртутного столба
     getPressure(pressure, lang, prefix = false) {
         switch (lang) {
             case LANG.RU: 
+            case LANG.UA:
                 let result = (pressure * 0.75).toFixed(0);
     
                 return prefix ? result + ' ' + PRESSURE_PREFIX.MMHG : result
@@ -87,18 +86,37 @@ const utils = {
                 return prefix ? pressure + ' ' + PRESSURE_PREFIX.HPA : pressure
         }
     }, 
+
+    // 
+    getUTCTime(unixTimestamp, lang, prefix = false) {
+        const hours24 = (new Date(unixTimestamp * 1000)).getUTCHours();
+        const minutes = new Date().getMinutes();
+
+        switch (lang) {
+            case LANG.RU:
+            case LANG.UA:
+                return hours24 + ':' + minutes;
+            case LANG.EN:
+                if (prefix) {
+                    return hours24 >= 12 ? (hours24 % 12 || 12) + ':' + minutes + ' PM' : (hours24 % 12 || 12) + ':' + minutes + ' AM';
+                } else {
+                    return (hours24 % 12 || 12) + ':' + minutes
+                }
+        }
+    }, 
     
     // 
     getVisibility(visibility, lang, prefix = false) {
         switch (lang) {
             case LANG.RU:
+            case LANG.UA:
                 const visibilityKm = (visibility / 1000).toFixed(1);
     
-                return prefix ? visibilityKm + ' ' + VISIBILITY_PREFIX.METRIC : visibilityKm;
+                return prefix ? visibilityKm + ' ' + VISIBILITY_PREFIX.METRIC[lang] : visibilityKm;
             case LANG.EN:
                 const visibilityMi = (visibility * 0.000621).toFixed(1);
     
-                return prefix ? visibilityMi + ' ' + VISIBILITY_PREFIX.IMPERIAL : visibilityMi;
+                return prefix ? visibilityMi + ' ' + VISIBILITY_PREFIX.IMPERIAL[lang] : visibilityMi;
         }
     }, 
     
@@ -107,6 +125,7 @@ const utils = {
         switch (lang) {
             case LANG.RU:
             case LANG.EN:
+            case LANG.UA:
                 return prefix ? humidity + ' ' + HUMIDITY_PREFIX.METRIC : humidity;
         }
     }, 

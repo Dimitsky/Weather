@@ -8,15 +8,12 @@ const unitsSlice = createSlice({
     name: 'units', 
     initialState, 
     reducers: { 
-        chooseImperial: () => {
-            return UNITS.IMPERIAL;
-        }, 
-        chooseMetric: () => {
-            return UNITS.METRIC;
-        }, 
+        setUnits: (state, action) => {
+            return action.payload
+        }
     }
 })
 
-export const { chooseImperial, chooseMetric } = unitsSlice.actions;
+export const { setUnits } = unitsSlice.actions;
 
 export default unitsSlice.reducer;
