@@ -1,7 +1,11 @@
+import { createPortal } from "react-dom";
+
+import styles from './PageLoader.module.css';
+
 export default function PageLoader() {
-    return (
-        <h1>
-            Loading
-        </h1>
-    )
+    const domNode = window.document.body;
+    const component = (
+        <div className={styles.wrap}></div>
+    );
+    return createPortal(component, domNode)
 }

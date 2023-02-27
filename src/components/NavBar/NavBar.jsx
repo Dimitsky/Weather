@@ -58,7 +58,7 @@ export default function NavBar({ className, ...restProps}) {
             {...restProps}
         >
             <button
-                className={isOpen ? [styles.burger, styles.burgerActive].join(' ') : styles.burger}
+                className={styles.burger}
                 aria-expanded={isOpen}
                 aria-controls='menu'
                 ref={triggerRef}
