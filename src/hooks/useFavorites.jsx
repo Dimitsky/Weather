@@ -23,6 +23,9 @@ export default function useFavorites() {
     return useQuery({
         queryKey: ['favorites', {lang, units}], 
         queryFn: handler, 
+        onError: (error) => {
+            alert(error.message);
+        }, 
         refetchOnWindowFocus: false, 
     })
 }

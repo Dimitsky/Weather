@@ -1,4 +1,5 @@
-.inner {
+.menu {
+    composes: reset from '../../Styles/List.module.css';
     composes: container from '../../Styles/Container.module.css';
     position: absolute;
     top: 0;
@@ -6,15 +7,15 @@
     right: 0;
     bottom: 0;
     z-index: 9000;
-    display: flex;
-    justify-content: center;
+    display: none;
+    flex-direction: column;
     padding-top: 5rem;
     text-align: center;
     background: #fff;
 }
 
-.menu {
-    composes: reset from '../../Styles/List.module.css';
+.menuIsOpen {
+    display: flex;
 }
 
 .burger {
@@ -66,8 +67,20 @@
 }
 
 @media screen and (min-width: 992px) {
-    .burger:hover {
-        background: var(--grey-1);
-        cursor: pointer;
+
+    .burger {
+        display: none;
+    }
+
+    .menu {
+        position: static;
+        display: flex;
+        flex-direction: row;
+        padding: 0;
+        text-align: left;
+    }
+
+    .link {
+        font-size: 1.2em;
     }
 }

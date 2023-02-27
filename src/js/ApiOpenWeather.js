@@ -22,7 +22,7 @@ export default class ApiOpenWeather {
 
             return result;
         } catch (error) {
-            new Promise((resolve, reject) => reject(error));
+            return new Promise((resolve, reject) => reject(error));
         }
     }
 

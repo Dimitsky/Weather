@@ -51,7 +51,7 @@ root.render(
 	<React.StrictMode>
 		<Provider store={store}>
 			<QueryClientProvider client={queryClient}>
-				<ReactQueryDevtools initialIsOpen={false} />
+				{/* <ReactQueryDevtools initialIsOpen={false} /> */}
 				<RouterProvider router={router}>
 					<App />
 				</RouterProvider>

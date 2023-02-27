@@ -26,6 +26,9 @@ export default function useWeather({ lat, lon, weatherType = 'weather'}) {
     return useQuery({
         queryKey: [weatherType, {lat, lon, lang, units}], 
         queryFn: handler, 
+        onError: (error) => {
+            alert(error.message);
+        }, 
         refetchOnWindowFocus: false, 
     })
 }
