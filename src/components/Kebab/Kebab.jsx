@@ -1,14 +1,16 @@
 import { useEffect, useRef, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { LANG, UNITS } from '../../js/consts';
 import { setLang } from '../../redux/langSlice/langSlice';
-import { IconKebab } from '../../components/Icon/Icon';
+import { IconKebab, IconTranslate } from '../../components/Icon/Icon';
 import { setUnits } from '../../redux/unitsSlice/unitsSlice';
 import FocusTrap from '../FocusTrap/FocusTrap';
 
 import styles from './Kebab.module.css';
 
 export default function Kebab({ className }) {
+    const lang = useSelector((state) => state.lang);
+    const units = useSelector((state) => state.units);
     const dispatch = useDispatch();
     const [ isOpen, setIsOpen ] = useState(false);
     const kebabTriggerRef = useRef(null);
@@ -85,47 +87,52 @@ export default function Kebab({ className }) {
                         >
                             <li className={styles.item}>
                                 <button 
-                                    className={styles.btn}
+                                    className={lang === LANG.RU ? [styles.btn, styles.btnActive].join(' ') : styles.btn}
                                     data-lang={LANG.RU}
                                     onClick={handleChoosLang}
                                 >
                                     Русский
+                                    <IconTranslate className={styles.iconLang}/>
                                 </button>
                             </li>
                             <li className={styles.item}>
                                 <button 
-                                    className={styles.btn}
+                                    className={lang === LANG.UA ? [styles.btn, styles.btnActive].join(' ') : styles.btn}
                                     data-lang={LANG.UA}
                                     onClick={handleChoosLang}
                                 >
                                     Украинский
+                                    <IconTranslate className={styles.iconLang}/>
                                 </button>
                             </li>
                             <li className={[styles.item, styles.br].join(' ')}>
                                 <button 
-                                    className={styles.btn}
+                                    className={lang === LANG.EN ? [styles.btn, styles.btnActive].join(' ') : styles.btn}
                                     data-lang={LANG.EN}
                                     onClick={handleChoosLang}
                                 >
                                     Английский
+                                    <IconTranslate className={styles.iconLang}/>
                                 </button>
                             </li>
                             <li className={styles.item}>
                                 <button 
-                                    className={styles.btn}
+                                    className={units === UNITS.METRIC ? [styles.btn, styles.btnActive].join(' ') : styles.btn}
                                     data-units={UNITS.METRIC}
                                     onClick={handleChoosUnits}
                                 >
                                     Цельсия
+                                    <span className={styles.degree}>&deg;C</span>
                                 </button>
                             </li>
                             <li className={styles.item}>
                                 <button 
-                                    className={styles.btn}
+                                    className={units === UNITS.IMPERIAL ? [styles.btn, styles.btnActive].join(' ') : styles.btn}
                                     data-units={UNITS.IMPERIAL}
                                     onClick={handleChoosUnits}
                                 >
                                     Фаренгейта
+                                    <span className={styles.degree}>&deg;F</span>
                                 </button>
                             </li>
                         </ul>
