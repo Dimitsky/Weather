@@ -10,17 +10,6 @@
 }
 
 .list {
-    /* position: absolute;
-    z-index: 8000;
-    margin-top: 0;
-    margin-bottom: 0;
-    padding: 0.4rem 0.75rem;
-    list-style: none;
-    border-radius: 0.75rem;
-    display: flex;
-    flex-direction: column;
-    background-color: #fff;
-    box-shadow: 0 0 10px 0 rgba(0 0 0 / 0.2); */
     position: absolute;
     top: 50vh;
     right: 0;
@@ -36,6 +25,7 @@
     flex-direction: column;
     background-color: #fff;
     box-shadow: 0 0 10px 0 rgba(0 0 0 / 0.2);
+    overflow: auto;
 }
 
 .br {

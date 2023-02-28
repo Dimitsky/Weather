@@ -40,7 +40,6 @@
     display: block;
     height: 2px;
     background: var(--grey-5);
-    transition: transform 500ms ease;
 }
 
 .first {
@@ -51,6 +50,15 @@
 .last {
     top: 24px;
     width: 26px;
+}
+
+[aria-expanded=true] .first {
+    transform: translateY(4px) rotate(-45deg);
+    width: 26px;
+}
+
+[aria-expanded=true] .last {
+    transform: translateY(-4px) rotate(45deg);
 }
 
 .link {
