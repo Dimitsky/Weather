@@ -31,7 +31,7 @@ export default function FocusTrap({ children, disableForDesktop = false }) {
             if (disableForDesktop) {
                 const clientWidth = window.document.documentElement.clientWidth;
     
-                if (clientWidth >= 992) return;
+                if (clientWidth >= 992) return
             }
 
             if (e.code === 'Tab') {
@@ -55,8 +55,21 @@ export default function FocusTrap({ children, disableForDesktop = false }) {
             }
         }
 
-        // При открытии сфокусироваться на первом элементе
-        firstFocusable.focus();
+        const clientWidth = window.document.documentElement.clientWidth;
+        
+        // Данная проверка необходима, чтобы отключить фокусировку на первом элементе для компонента с пропсом disableForDesktop 
+        // (без этой проверки, после загрузки страницы фокус будет на первом элементе в списке главного меню)
+        if (disableForDesktop) {
+
+            if (clientWidth < 992) {
+                // При открытии сфокусироваться на первом элементе
+                firstFocusable.focus();
+            }
+        } else {
+            // При открытии сфокусироваться на первом элементе
+            firstFocusable.focus();
+        }
+
         element.addEventListener('keydown', handler);
 
         return () => {

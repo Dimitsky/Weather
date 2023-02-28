@@ -17,10 +17,12 @@ export default function Kebab({ className }) {
 
     const handleChoosLang = (e) => {
         dispatch(setLang(e.target.dataset.lang));
+        setIsOpen(false);
     }
-
+    
     const handleChoosUnits = (e) => {
         dispatch(setUnits(e.target.dataset.units));
+        setIsOpen(false);
     }
 
     const handleTrigger = () => {
