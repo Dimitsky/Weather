@@ -2,20 +2,21 @@
     composes: reset from '../../Styles/List.module.css';
     composes: container from '../../Styles/Container.module.css';
     position: absolute;
-    top: 0;
+    top: -100%;
     left: 0;
-    right: 0;
-    bottom: 0;
     z-index: 9000;
-    display: none;
+    display: flex;
     flex-direction: column;
+    width: 100%;
+    height: 100%;
     padding-top: 5rem;
     text-align: center;
     background: #fff;
+    animation: var(--duration) var(--timing-function) closeMenu;
 }
 
 .menuIsOpen {
-    display: flex;
+    animation: var(--duration) var(--timing-function) forwards openMenu;
 }
 
 .burger {
@@ -72,6 +73,26 @@
 
 .activeLink {
     color: red;
+}
+
+@keyframes openMenu {
+    0% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(100%);
+    }
+}
+
+@keyFrames closeMenu {
+    0% {
+        transform: translateY(100%);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
 }
 
 @media screen and (min-width: 992px) {

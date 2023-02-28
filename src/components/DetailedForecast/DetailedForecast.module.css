@@ -76,8 +76,10 @@
     .boxWrap {
         justify-content: space-around;
     }
+}
 
-    .list {
-        justify-content: space-around;
+@media screen and (min-width: 992px) {
+    .item:not(:last-child) {
+        margin-right: 2rem;
     }
 }

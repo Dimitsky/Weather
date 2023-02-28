@@ -1,4 +1,4 @@
 .transition {
-	--transition-duration: 150ms;
-	--transition-timing-function: ease;
+	--duration: 150ms;
+	--timing-function: ease;
 }
