@@ -1,0 +1,19 @@
+@keyframes in-content {
+	0% {
+		min-height: 0;
+	}
+
+	100% {
+		min-height: 300px;
+	}
+}
+
+@keyframes out-content {
+    0% {
+        min-height: 300px;
+    }
+
+    100% {
+        min-height: 0;
+    }
+}

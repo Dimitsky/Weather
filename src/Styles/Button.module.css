@@ -13,6 +13,9 @@
     border-radius: 0.75rem;
     width: var(--size);
     height: var(--size);
+    transition: 
+        transform var(--timing-function) var(--duration), 
+        background-color var(--duration) var(--timing-function);
 }
 
 .button:active {

@@ -21,6 +21,7 @@
         'description current';
     border-radius: 0.75rem;
     background: var(--grey-2);
+    transition: background-color var(--duration) var(--timing-function);
 }
 
 .name {

@@ -10,12 +10,12 @@
 }
 
 .list {
-    position: absolute;
-    top: 50vh;
-    right: 0;
+    position: fixed;
     left: 0;
-    bottom: 0;
+    bottom: -50%;
     z-index: 8000;
+    width: 100%;
+    height: 50%;
     margin-top: 0;
     margin-bottom: 0;
     padding: 0.4rem 0.75rem;
@@ -26,6 +26,11 @@
     background-color: #fff;
     box-shadow: 0 0 10px 0 rgba(0 0 0 / 0.2);
     overflow: auto;
+    animation: out-mobile-menu var(--duration) var(--timing-function) forwards;
+}
+
+.listActive {
+    animation: in-mobile-menu var(--duration) var(--timing-function) forwards;
 }
 
 .br {
@@ -61,17 +66,66 @@
     composes: strong from '../../Styles/Types.module.css';
 }
 
+@keyframes in-mobile-menu {
+    0% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(-100%);
+    }
+}
+
+@keyframes out-mobile-menu {
+    0% {
+        transform: translateY(-100%);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+@keyframes in-menu {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes out-menu {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
 @media screen and (min-width: 768px) {
     .wrap {
         position: relative;
     }
     
     .list {
+        position: absolute;
         top: unset;
         right: unset;
         bottom: unset;
         left: unset;
         min-width: 200px;
+        width: unset;
+        height: unset;
+        transform: none;
+        animation-name: out-menu;
+    }
+
+    .listActive {
+        animation-name: in-menu;
     }
     
     .btn {

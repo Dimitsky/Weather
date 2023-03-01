@@ -12,11 +12,11 @@
     padding-top: 5rem;
     text-align: center;
     background: #fff;
-    animation: var(--duration) var(--timing-function) closeMenu;
+    animation: var(--duration) ease-in-out closeMenu;
 }
 
 .menuIsOpen {
-    animation: var(--duration) var(--timing-function) forwards openMenu;
+    animation: var(--duration) ease-in-out forwards openMenu;
 }
 
 .burger {
@@ -41,6 +41,9 @@
     display: block;
     height: 2px;
     background: var(--grey-5);
+    transition: 
+        transform ease-in-out var(--duration), 
+        width ease-in-out var(--duration);
 }
 
 .first {

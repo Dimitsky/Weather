@@ -71,7 +71,7 @@ export default function NavBar({ className, ...restProps}) {
         >
             <button
                 className={styles.burger}
-                aria-expanded={isOpen}
+                aria-expanded={isMounted}
                 aria-controls='menu'
                 ref={triggerRef}
                 onClick={handleToggleMenu}

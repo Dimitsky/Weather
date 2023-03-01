@@ -13,20 +13,31 @@ export default function Kebab({ className }) {
     const units = useSelector((state) => state.units);
     const dispatch = useDispatch();
     const [ isOpen, setIsOpen ] = useState(false);
+    const [ isMounted, setIsMounted ] = useState(false);
     const kebabTriggerRef = useRef(null);
 
     const handleChoosLang = (e) => {
         dispatch(setLang(e.target.dataset.lang));
-        setIsOpen(false);
+        setIsMounted(false);
     }
     
     const handleChoosUnits = (e) => {
         dispatch(setUnits(e.target.dataset.units));
-        setIsOpen(false);
+        setIsMounted(false);
     }
 
     const handleTrigger = () => {
-        setIsOpen(!isOpen);
+        setIsMounted(!isMounted);
+
+        if (!isOpen) {
+            setIsOpen(true);
+        }
+    }
+
+    const handleOnAnimationEnd = () => {
+        if (!isMounted) {
+            setIsOpen(false);
+        }
     }
 
     useEffect(() => {
@@ -36,7 +47,7 @@ export default function Kebab({ className }) {
 
         const handler = (e) => {
             if (e.code === 'Escape') {
-                setIsOpen(false);
+                setIsMounted(false);
             }
         }
 
@@ -54,7 +65,7 @@ export default function Kebab({ className }) {
 
         const handler = (e) => {
             if (!e.target.closest('[data-kebab]')) {
-                setIsOpen(false);
+                setIsMounted(false);
             }
         }
 
@@ -67,7 +78,7 @@ export default function Kebab({ className }) {
 
     return (
         <div 
-            className={styles.wrap}
+            className={className ? [styles.wrap, styles.className].join(' ') : styles.wrap}
             data-kebab
         >
             <button 
@@ -84,8 +95,9 @@ export default function Kebab({ className }) {
                 isOpen && (
                     <FocusTrap>
                         <ul 
-                            className={className ? [styles.list, styles.className].join(' ') : styles.list}
+                            className={isMounted ? [styles.list, styles.listActive].join(' ') : styles.list}
                             id="kebab-menu"
+                            onAnimationEnd={handleOnAnimationEnd}
                         >
                             <li className={styles.item}>
                                 <button 
