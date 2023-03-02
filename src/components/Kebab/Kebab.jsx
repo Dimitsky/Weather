@@ -92,66 +92,68 @@ export default function Kebab({ className }) {
                 <IconKebab className={styles.icon}/>
             </button>
             {
-                isOpen && (
-                    <FocusTrap>
-                        <ul 
-                            className={isMounted ? [styles.list, styles.listActive].join(' ') : styles.list}
-                            id="kebab-menu"
-                            onAnimationEnd={handleOnAnimationEnd}
-                        >
-                            <li className={styles.item}>
-                                <button 
-                                    className={lang === LANG.RU ? [styles.btn, styles.btnActive].join(' ') : styles.btn}
-                                    data-lang={LANG.RU}
-                                    onClick={handleChoosLang}
-                                >
-                                    Русский
-                                    <IconTranslate className={styles.iconLang}/>
-                                </button>
-                            </li>
-                            <li className={styles.item}>
-                                <button 
-                                    className={lang === LANG.UA ? [styles.btn, styles.btnActive].join(' ') : styles.btn}
-                                    data-lang={LANG.UA}
-                                    onClick={handleChoosLang}
-                                >
-                                    Украинский
-                                    <IconTranslate className={styles.iconLang}/>
-                                </button>
-                            </li>
-                            <li className={[styles.item, styles.br].join(' ')}>
-                                <button 
-                                    className={lang === LANG.EN ? [styles.btn, styles.btnActive].join(' ') : styles.btn}
-                                    data-lang={LANG.EN}
-                                    onClick={handleChoosLang}
-                                >
-                                    Английский
-                                    <IconTranslate className={styles.iconLang}/>
-                                </button>
-                            </li>
-                            <li className={styles.item}>
-                                <button 
-                                    className={units === UNITS.METRIC ? [styles.btn, styles.btnActive].join(' ') : styles.btn}
-                                    data-units={UNITS.METRIC}
-                                    onClick={handleChoosUnits}
-                                >
-                                    Цельсия
-                                    <span className={styles.degree}>&deg;C</span>
-                                </button>
-                            </li>
-                            <li className={styles.item}>
-                                <button 
-                                    className={units === UNITS.IMPERIAL ? [styles.btn, styles.btnActive].join(' ') : styles.btn}
-                                    data-units={UNITS.IMPERIAL}
-                                    onClick={handleChoosUnits}
-                                >
-                                    Фаренгейта
-                                    <span className={styles.degree}>&deg;F</span>
-                                </button>
-                            </li>
-                        </ul>
-                    </FocusTrap>
-                )
+                <FocusTrap isActive={isOpen}>
+                    {
+                        isOpen && (
+                            <ul 
+                                className={isMounted ? [styles.list, styles.listActive].join(' ') : styles.list}
+                                id="kebab-menu"
+                                onAnimationEnd={handleOnAnimationEnd}
+                            >
+                                <li className={styles.item}>
+                                    <button 
+                                        className={lang === LANG.RU ? [styles.btn, styles.btnActive].join(' ') : styles.btn}
+                                        data-lang={LANG.RU}
+                                        onClick={handleChoosLang}
+                                    >
+                                        Русский
+                                        <IconTranslate className={styles.iconLang}/>
+                                    </button>
+                                </li>
+                                <li className={styles.item}>
+                                    <button 
+                                        className={lang === LANG.UA ? [styles.btn, styles.btnActive].join(' ') : styles.btn}
+                                        data-lang={LANG.UA}
+                                        onClick={handleChoosLang}
+                                    >
+                                        Украинский
+                                        <IconTranslate className={styles.iconLang}/>
+                                    </button>
+                                </li>
+                                <li className={[styles.item, styles.br].join(' ')}>
+                                    <button 
+                                        className={lang === LANG.EN ? [styles.btn, styles.btnActive].join(' ') : styles.btn}
+                                        data-lang={LANG.EN}
+                                        onClick={handleChoosLang}
+                                    >
+                                        Английский
+                                        <IconTranslate className={styles.iconLang}/>
+                                    </button>
+                                </li>
+                                <li className={styles.item}>
+                                    <button 
+                                        className={units === UNITS.METRIC ? [styles.btn, styles.btnActive].join(' ') : styles.btn}
+                                        data-units={UNITS.METRIC}
+                                        onClick={handleChoosUnits}
+                                    >
+                                        Цельсия
+                                        <span className={styles.degree}>&deg;C</span>
+                                    </button>
+                                </li>
+                                <li className={styles.item}>
+                                    <button 
+                                        className={units === UNITS.IMPERIAL ? [styles.btn, styles.btnActive].join(' ') : styles.btn}
+                                        data-units={UNITS.IMPERIAL}
+                                        onClick={handleChoosUnits}
+                                    >
+                                        Фаренгейта
+                                        <span className={styles.degree}>&deg;F</span>
+                                    </button>
+                                </li>
+                            </ul>
+                        )
+                    }
+                </FocusTrap>
             }
         </div>
     )

@@ -15,10 +15,11 @@ const focusable = [
 // Если ловушку фокуса не отключить (например, для бургер меню, которое всегда находится на экране в настольной версии), 
 // то пользователь не сможет использовать навигацию с помощью клавиатуры, 
 // т. к. фокус застрянет внутри меню, как только в него попадет. 
-export default function FocusTrap({ children, disableForDesktop = false }) {
+export default function FocusTrap({ children, isActive, disableForDesktop = false }) {
     const wrapRef = useRef(null);
 
     useEffect(() => {
+        if (!isActive) return;
         const element = wrapRef.current;
         // Фокусируемы элементы внутри компонента
         const focusableEls = element.querySelectorAll(focusable.join(', '));
@@ -74,8 +75,8 @@ export default function FocusTrap({ children, disableForDesktop = false }) {
 
         return () => {
             element.removeEventListener('keydown', handler);
-        }
-    })
+         }
+    }, [isActive])
 
     return (
         <div ref={wrapRef}>

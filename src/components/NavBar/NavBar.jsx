@@ -6,25 +6,14 @@ import styles from './NavBar.module.css';
 
 export default function NavBar({ className, ...restProps}) {
     const [ isOpen, setIsOpen ] = useState(false);
-    const [ isMounted, setIsMounted ] = useState(false);
     const triggerRef = useRef(null);
 
     const handleToggleMenu = () => {
-        setIsMounted(!isMounted);
-
-        if (!isOpen) {
-            setIsOpen(true);
-        }
+        setIsOpen(!isOpen);
     }
 
     const handleOnClickLink = () => {
         setIsOpen(false);
-    }
-
-    const handleMenuAnimationEnd = () => {
-        if (!isMounted) {
-            setIsOpen(false);
-        }
     }
 
     // После открытия меню, его можно закрыть клавишей Escape
@@ -35,7 +24,7 @@ export default function NavBar({ className, ...restProps}) {
 
         const handler = (e) => {
             if (e.code === 'Escape') {
-                setIsMounted(false);
+                setIsOpen(false);
             }
         }
 
@@ -71,7 +60,7 @@ export default function NavBar({ className, ...restProps}) {
         >
             <button
                 className={styles.burger}
-                aria-expanded={isMounted}
+                aria-expanded={isOpen}
                 aria-controls='menu'
                 ref={triggerRef}
                 onClick={handleToggleMenu}
@@ -79,36 +68,34 @@ export default function NavBar({ className, ...restProps}) {
                 <span className={styles.first}></span>
                 <span className={styles.last}></span>
             </button>
-            {
-                isOpen && (
-                    <FocusTrap disableForDesktop={true}>
-                        <ul
-                            className={isMounted ? [styles.menu, styles.menuIsOpen].join(' ') : styles.menu}
-                            id="menu"
-                            onAnimationEnd={handleMenuAnimationEnd}
+            <FocusTrap 
+                isActive={isOpen}
+                disableForDesktop={true}
+            >
+                <ul
+                    className={isOpen ? [styles.menu, styles.menuIsOpen].join(' ') : styles.menu}
+                    id="menu"
+                >
+                    <li className={styles.item}>
+                        <NavLink 
+                            className={({ isActive }) => isActive ? [styles.link, styles.activeLink].join(' ') : styles.link}
+                            to="/"
+                            onClick={handleOnClickLink}
                         >
-                            <li className={styles.item}>
-                                <NavLink 
-                                    className={({ isActive }) => isActive ? [styles.link, styles.activeLink].join(' ') : styles.link}
-                                    to="/"
-                                    onClick={handleOnClickLink}
-                                >
-                                    Домой
-                                </NavLink>
-                            </li>
-                            <li className={styles.item}>
-                                <NavLink 
-                                    className={({ isActive }) => isActive ? [styles.link, styles.activeLink].join(' ') : styles.link}
-                                    to="/favorites"
-                                    onClick={handleOnClickLink}
-                                >
-                                    Избранное
-                                </NavLink>
-                            </li>
-                        </ul>
-                    </FocusTrap>
-                )
-            }
+                            Домой
+                        </NavLink>
+                    </li>
+                    <li className={styles.item}>
+                        <NavLink 
+                            className={({ isActive }) => isActive ? [styles.link, styles.activeLink].join(' ') : styles.link}
+                            to="/favorites"
+                            onClick={handleOnClickLink}
+                        >
+                            Избранное
+                        </NavLink>
+                    </li>
+                </ul>
+            </FocusTrap>
         </nav>
     )
 }
