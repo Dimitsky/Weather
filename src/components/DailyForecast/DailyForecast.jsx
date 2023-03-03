@@ -55,11 +55,11 @@ export default function DailyForecast({ className, data, ...restProps }) {
                                         <div className={styles.descriptionWrap}>
                                             <img 
                                                 className={styles.img}
-                                                src={utils.getWeatherIconSrc(dailyForecast[key][0].weather[0].icon)} 
+                                                src={utils.getWeatherIconSrc(dailyForecast[key][(dailyForecast[key].length / 2).toFixed(0) - 1].weather[0].icon)} 
                                                 alt="" 
                                             />
                                             <span className={styles.description}>
-                                                {dailyForecast[key][0].weather[0].description}
+                                                {dailyForecast[key][(dailyForecast[key].length / 2).toFixed(0) - 1].weather[0].description}
                                             </span>
                                         </div>
                                     </div>
