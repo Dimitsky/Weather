@@ -19,7 +19,9 @@
 }
 
 .content {
-	margin-top: 1em;
+	height: 0;
+	overflow: hidden;
+	transition: height var(--duration) var(--timing-function);
 }
 
 .icon {

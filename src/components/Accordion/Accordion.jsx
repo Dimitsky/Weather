@@ -1,18 +1,16 @@
-import { createContext, useContext, useEffect, useRef, useState } from "react";
+import { createContext, useContext, useEffect, useMemo, useRef, useState } from "react";
 import { IconCaretUp } from "../Icon/Icon";
 
 import styles from './Accordion.module.css';
-// import animation from './animation.css';
 
 const AccordionContext = createContext(null);
 
 function Accordion({ className, children, ...restProps }) {
 	const [ acc, setAcc ] = useState({});
-
-	const value = {
+	const value = useMemo(() => ({
 		acc, 
 		setAcc, 
-	}
+	}), [acc, setAcc]);
 
 	return (
 		<AccordionContext.Provider value={value}>
@@ -28,11 +26,22 @@ function Accordion({ className, children, ...restProps }) {
 
 function AccordionItem({ className, itemKey, title, content, ...restProps }) {
 	const { acc, setAcc } = useContext(AccordionContext);
+	const contentRef = useRef();
 
 	const handleToggleContent = () => {
-		setAcc((prevAcc) => ({
-			[itemKey]: !prevAcc[itemKey], 
-		}))
+		const isOpen = !acc[itemKey];
+
+		setAcc({
+			[itemKey]: isOpen, 
+		});
+
+		if (isOpen) {
+			const height = contentRef.current.scrollHeight;
+
+			contentRef.current.style.height = height + 'px';
+		} else {
+			contentRef.current.style.height = '';
+		}
 	}
 
 	return (
@@ -49,16 +58,13 @@ function AccordionItem({ className, itemKey, title, content, ...restProps }) {
 				{title}
 				<IconCaretUp className={acc[itemKey] ? [styles.icon, styles.iconActive].join(' ') : styles.icon}/>
 			</button>
-			{
-				acc[itemKey] && (
-					<div
-						className={styles.content}
-						id={`content-${itemKey}`}
-					>
-						{content}
-					</div>
-				)
-			}
+			<div
+				className={styles.content}
+				id={`content-${itemKey}`}
+				ref={contentRef}
+			>
+				{content}
+			</div>
 		</li>
 	)
 }

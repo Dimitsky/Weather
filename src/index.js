@@ -52,9 +52,7 @@ root.render(
 		<Provider store={store}>
 			<QueryClientProvider client={queryClient}>
 				{/* <ReactQueryDevtools initialIsOpen={false} /> */}
-				<RouterProvider router={router}>
-					<App />
-				</RouterProvider>
+				<RouterProvider router={router}></RouterProvider>
 			</QueryClientProvider>
 		</Provider>
 	</React.StrictMode>
